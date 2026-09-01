@@ -1,0 +1,38 @@
+---
+title: دليل استخدام نظام ION
+description: الدليل الكامل لجميع تخصيصات ION على منصة Frappe / ERPNext / HRMS — خطوة بخطوة بالصور.
+template: splash
+hero:
+  tagline: دليل عملي بالصور لكل تخصيصات ION فوق ERPNext/HRMS — المشتريات، المبيعات وإدارة العملاء، الموارد البشرية، التوظيف، التحويل بين الشركات، وتكامل البصمة.
+  actions:
+    - text: ابدأ من هنا
+      link: /start/overview/
+      icon: right-arrow
+      variant: primary
+    - text: قوائم تحقّق حسب الدور
+      link: /start/first-week/
+      icon: document
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+	<Card title="جديد على النظام؟" icon="open-book">
+		ابدأ بـ [ما هذا الدليل؟](/start/overview/) ثم [جولة في واجهة النظام](/start/desk-tour/) و[المفاهيم الأساسية](/start/concepts/).
+	</Card>
+	<Card title="المشتريات" icon="setting">
+		[طلب مواد والمراجعة الفنية](/buying/material-request/) · [أمر الشراء وفاتورة الشراء](/buying/purchase-cycle/) · [أنواع المواد والأقسام الفنية](/buying/masters/)
+	</Card>
+	<Card title="المبيعات وإدارة العملاء" icon="approve-check">
+		[نظرة عامة على الفرص الخمسة](/sales-crm/opportunities-overview/) · [الهوت-سبوت](/sales-crm/hotspot/) · [العمولات](/sales-crm/commissions/)
+	</Card>
+	<Card title="الموارد البشرية" icon="pencil">
+		[التأخير والخروج المبكر](/hr/attendance-lateness/) · [التقييمات السنوية](/hr/appraisals/) · [إدارة الجزاءات](/hr/penalties/)
+	</Card>
+	<Card title="التوظيف والتكاملات" icon="rocket">
+		[أسئلة فرز المرشحين](/career/job-question-sets/) · [تحويل المخزون بين الشركات](/intercompany/stock-transfer/) · [تكامل البصمة BioTime](/biotime/biotime-setup/)
+	</Card>
+	<Card title="ظهرت لك رسالة خطأ؟" icon="warning">
+		افتح [رسائل الخطأ ومعانيها](/help/errors/) — كل رسالة وسببها وحلّها.
+	</Card>
+</CardGrid>

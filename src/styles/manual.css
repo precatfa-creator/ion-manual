@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Tinos:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Latin runs render in Times New Roman, Arabic in Tajawal. The split is done
+   by unicode-range: this face only claims Latin, punctuation, currency and
+   number-form ranges, so every Arabic glyph falls through to Tajawal.
+   Liberation Serif / Tinos are the metric-compatible stand-ins on machines
+   without Times New Roman. */
+@font-face {
+	font-family: 'ManualLatin';
+	src: local('Times New Roman'), local('TimesNewRomanPSMT'),
+	     local('Liberation Serif'), local('Tinos'), local('Nimbus Roman');
+	unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-218F;
+}
+
+@font-face {
+	font-family: 'ManualLatin';
+	font-weight: 700;
+	src: local('Times New Roman Bold'), local('TimesNewRomanPS-BoldMT'),
+	     local('Liberation Serif Bold'), local('Tinos Bold'), local('Nimbus Roman Bold');
+	unicode-range: U+0000-024F, U+2000-206F, U+2070-209F, U+20A0-20CF, U+2100-218F;
+}
+
+:root {
+	/* ManualLatin = the local Times face; Tinos is the web fallback for machines
+	   that have no Times-compatible serif; Tajawal then takes every Arabic glyph. */
+	--sl-font: 'ManualLatin', 'Tinos', 'Tajawal', 'Segoe UI', Tahoma, system-ui, sans-serif;
+	--sl-font-system: var(--sl-font);
+}
+
+/* Code spans carry both Arabic error messages and Latin identifiers/paths.
+   `plaintext` picks each span's direction from its own first strong character,
+   so Arabic reads RTL and `EIMS Student` / `/app/eims-student` read LTR. */
+code, pre {
+	unicode-bidi: plaintext;
+}
+
+/* Keyboard hints are always Latin: keep Ctrl before K. */
+kbd, .ltr {
+	direction: ltr;
+	unicode-bidi: isolate;
+}
+
+/* Numbered procedures are the backbone of this manual: give them room. */
+.sl-markdown-content ol > li + li {
+	margin-block-start: 0.75rem;
+}
+
+.sl-markdown-content img {
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.5rem;
+}
