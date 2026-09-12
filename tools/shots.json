@@ -1,233 +1,199 @@
 [
- {
-  "name": "login",
-  "url": "/login",
-  "auth": false,
-  "report": false
- },
- {
-  "name": "workspace-eims",
-  "url": "/app/eims",
-  "report": false
- },
- {
-  "name": "form-eims-institution",
-  "url": "/app/eims-institution/مدرسة سهول العلم للتعليم الخاص",
-  "report": false
- },
- {
-  "name": "form-eims-academic-year",
-  "url": "/app/eims-academic-year/2026-2027",
-  "report": false
- },
- {
-  "name": "form-eims-stage",
-  "url": "/app/eims-stage/التاسع الإعدادي",
-  "report": false
- },
- {
-  "name": "form-eims-section",
-  "url": "/app/eims-section/التاسع الإعدادي-A",
-  "report": false
- },
- {
-  "name": "form-eims-subject",
-  "url": "/app/eims-subject/التاسع الإعدادي-الحاسوب",
-  "report": false
- },
- {
-  "name": "list-eims-nationality",
-  "url": "/app/eims-nationality",
-  "report": false
- },
- {
-  "name": "form-eims-academic-curriculum",
-  "url": "/app/eims-academic-curriculum/2026-2027-الروضة-الروضة-القرآن الكريم",
-  "report": false
- },
- {
-  "name": "form-eims-staff",
-  "url": "/app/eims-staff/EIMS-STAFF-00013",
-  "report": false
- },
- {
-  "name": "form-eims-staff-academic-assignment",
-  "url": "/app/eims-staff-academic-assignment/EIMS-STAFF-00013-2026-2027",
-  "report": false
- },
- {
-  "name": "form-eims-teacher-assignment",
-  "url": "/app/eims-teacher-assignment/90537ac39s",
-  "report": false
- },
- {
-  "name": "form-eims-staff-attendance",
-  "url": "/app/eims-staff-attendance/ATT-2026-08-31-00092",
-  "report": false
- },
- {
-  "name": "list-eims-student",
-  "url": "/app/eims-student",
-  "report": false
- },
- {
-  "name": "form-eims-student",
-  "url": "/app/eims-student/1055",
-  "report": false
- },
- {
-  "name": "form-eims-guardian",
-  "url": "/app/eims-guardian/GRD-00098",
-  "report": false
- },
- {
-  "name": "form-eims-student-health-profile",
-  "url": "/app/eims-student-health-profile/1003",
-  "report": false
- },
- {
-  "name": "form-eims-daily-accomplishment",
-  "url": "/app/eims-daily-accomplishment/DACC-00111",
-  "report": false
- },
- {
-  "name": "form-eims-morning-assembly",
-  "url": "/app/eims-morning-assembly/ASM-00101",
-  "report": false
- },
- {
-  "name": "form-eims-result",
-  "url": "/app/eims-result/RES-1036-2026-2027",
-  "report": false
- },
- {
-  "name": "form-eims-stage-fee",
-  "url": "/app/eims-stage-fee/التاسع الإعدادي-2026-2027",
-  "report": false
- },
- {
-  "name": "form-eims-student-payment",
-  "url": "/app/eims-student-payment/PAY-00088",
-  "report": false
- },
- {
-  "name": "form-eims-disciplinary-action",
-  "url": "/app/eims-disciplinary-action/DA-00102",
-  "report": false
- },
- {
-  "name": "form-eims-school-activity",
-  "url": "/app/eims-school-activity/ACT-00103",
-  "report": false
- },
- {
-  "name": "form-eims-activity-consent",
-  "url": "/app/eims-activity-consent/CON-00105",
-  "report": false
- },
- {
-  "name": "form-eims-request",
-  "url": "/app/eims-request/REQ-00113",
-  "report": false
- },
- {
-  "name": "form-eims-official-correspondence",
-  "url": "/app/eims-official-correspondence/COR-00107",
-  "report": false
- },
- {
-  "name": "new-eims-student",
-  "url": "/app/eims-student/new",
-  "report": false
- },
- {
-  "name": "report-class-performance-report",
-  "url": "/app/query-report/Class%20Performance%20Report",
-  "report": false
- },
- {
-  "name": "print-result",
-  "url": "/app/print/EIMS%20Result/RES-1036-2026-2027",
-  "report": false
- },
- {
-  "name": "user-list",
-  "url": "/app/user",
-  "report": false
- },
- {
-  "name": "role-list",
-  "url": "/app/role",
-  "report": false
- },
- {
-  "name": "new-user",
-  "url": "/app/user/new",
-  "report": false
- },
- {
-  "name": "permission-manager",
-  "url": "/app/permission-manager",
-  "report": false
- },
- {
-  "name": "report-class-performance-filled",
-  "url": "/app/query-report/Class Performance Report?academic_year=2026-2027&stage=%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3+%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A&section=%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3+%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A-A",
-  "report": true
- },
- {
-  "name": "report-student-report-card-filled",
-  "url": "/app/query-report/Student Report Card?academic_year=2026-2027&student=1036",
-  "report": true
- },
- {
-  "name": "report-subject-wise-filled",
-  "url": "/app/query-report/Subject Wise Analysis?academic_year=2026-2027&stage=%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3+%D8%A7%D9%84%D8%A7%D8%A8%D8%AA%D8%AF%D8%A7%D8%A6%D9%8A",
-  "report": true
- },
- {
-  "name": "report-teacher-grade-summary-filled",
-  "url": "/app/query-report/Teacher Grade Summary?academic_year=2026-2027&staff=EIMS-STAFF-00007",
-  "report": true
- },
- {
-  "name": "form-assessment-submitted",
-  "url": "/app/eims-assessment/ASMT-الخامس الابتدائي-الرياضيات-الفترة الأولى-00089",
-  "report": false
- },
- {
-  "name": "form-attendance-filled",
-  "url": "/app/eims-student-attendance/SATT-00110",
-  "report": false
- },
- {
-  "name": "form-enrollment-payment",
-  "url": "/app/eims-enrollment/1055-2026-2027",
-  "report": false
- },
- {
-  "name": "form-timetable-slots",
-  "url": "/app/eims-timetable/TT-00099",
-  "report": false
- },
- {
-  "name": "print-student-certificate",
-  "url": "/app/print/EIMS Student/1036?format=EIMS Student Certificate",
-  "report": false
- },
- {
-  "name": "print-enrollment-form",
-  "url": "/app/print/EIMS Enrollment/1055-2026-2027?format=EIMS Enrollment Form",
-  "report": false
- },
- {
-  "name": "print-assessment-sheet",
-  "url": "/app/print/EIMS Assessment/ASMT-الخامس الابتدائي-الرياضيات-الفترة الأولى-00089?format=EIMS Assessment Grade Sheet",
-  "report": false
- },
- {
-  "name": "list-report-view",
-  "url": "/app/eims-student/view/report",
-  "report": false
- }
+  {
+    "name": "current-material-request",
+    "doctype": "Material Request"
+  },
+  {
+    "name": "current-intercompany-transfer",
+    "doctype": "Intercompany Stock Transfer"
+  },
+  {
+    "name": "current-opportunity",
+    "doctype": "Opportunity"
+  },
+  {
+    "name": "current-opportunity-sm",
+    "doctype": "Opportunity SM"
+  },
+  {
+    "name": "current-opportunity-hotels",
+    "doctype": "Opportunity Hotels"
+  },
+  {
+    "name": "current-opportunity-isp",
+    "doctype": "Opportunity ISP"
+  },
+  {
+    "name": "current-opportunity-tenders",
+    "doctype": "Opportunity Tenders"
+  },
+  {
+    "name": "current-hotspot",
+    "doctype": "Hotspot"
+  },
+  {
+    "name": "current-extra-hours-request",
+    "doctype": "EXTRA HOURS REQUEST"
+  },
+  {
+    "name": "current-late-entry-request",
+    "doctype": "Late Entry Request"
+  },
+  {
+    "name": "current-attendance-request",
+    "doctype": "Attendance Request"
+  },
+  {
+    "name": "current-shift-request",
+    "doctype": "Shift Request"
+  },
+  {
+    "name": "current-commission-sheet",
+    "doctype": "Sales Target and Commission Sheet"
+  },
+  {
+    "name": "current-contract",
+    "doctype": "Contract"
+  },
+  {
+    "name": "current-quotation",
+    "doctype": "Quotation"
+  },
+  {
+    "name": "current-purchase-order",
+    "doctype": "Purchase Order"
+  },
+  {
+    "name": "current-purchase-receipt",
+    "doctype": "Purchase Receipt"
+  },
+  {
+    "name": "current-purchase-invoice",
+    "doctype": "Purchase Invoice"
+  },
+  {
+    "name": "current-sales-order",
+    "doctype": "Sales Order"
+  },
+  {
+    "name": "current-sales-invoice",
+    "doctype": "Sales Invoice"
+  },
+  {
+    "name": "current-payment-entry",
+    "doctype": "Payment Entry"
+  },
+  {
+    "name": "current-journal-entry",
+    "doctype": "Journal Entry"
+  },
+  {
+    "name": "current-job-opening",
+    "doctype": "Job Opening"
+  },
+  {
+    "name": "current-job-question-set",
+    "doctype": "Job Question Set"
+  },
+  {
+    "name": "current-leave-application",
+    "doctype": "Leave Application"
+  },
+  {
+    "name": "current-expense-claim",
+    "doctype": "Expense Claim"
+  },
+  {
+    "name": "current-subscription",
+    "doctype": "Subscription"
+  },
+  {
+    "name": "current-delivery-note",
+    "doctype": "Delivery Note"
+  },
+  {
+    "name": "current-material-type",
+    "doctype": "Material Type"
+  },
+  {
+    "name": "current-item",
+    "doctype": "Item"
+  },
+  {
+    "name": "current-technical-survey",
+    "doctype": "Technical Survey"
+  },
+  {
+    "name": "current-company-document",
+    "doctype": "Company Document"
+  },
+  {
+    "name": "current-appraisal",
+    "doctype": "Appraisal"
+  },
+  {
+    "name": "current-distributor",
+    "doctype": "Distributor"
+  },
+  {
+    "name": "current-booking",
+    "doctype": "Booking"
+  },
+  {
+    "name": "current-issue",
+    "doctype": "Issue"
+  },
+  {
+    "name": "current-fuel-management",
+    "doctype": "Fuel Management"
+  },
+  {
+    "name": "current-salary-bank-advice",
+    "doctype": "Salary Bank Advice"
+  },
+  {
+    "name": "current-transfer-request",
+    "doctype": "Employee transfer requests"
+  },
+  {
+    "name": "current-part-time-contract",
+    "doctype": "Part-time Employment Contract"
+  },
+  {
+    "name": "current-training-request",
+    "doctype": "Training Request"
+  },
+  {
+    "name": "current-employee-discovery",
+    "doctype": "Employee Discovery"
+  },
+  {
+    "name": "current-biotime-setting",
+    "doctype": "BioTime Setting"
+  },
+  {
+    "name": "current-technical-survey-template",
+    "doctype": "Technical Survey Template"
+  },
+  {
+    "name": "current-shift-type",
+    "doctype": "Shift Type"
+  },
+  {
+    "name": "current-late-hours",
+    "doctype": "Late Hours"
+  },
+  {
+    "name": "current-home",
+    "url": "/app/home"
+  },
+  {
+    "name": "current-material-request-list",
+    "url": "/app/material-request"
+  },
+  {
+    "name": "current-user-menu",
+    "url": "/app/home",
+    "menu": true
+  }
 ]

@@ -15,6 +15,7 @@ export default defineConfig({
 				root: { label: 'العربية', lang: 'ar', dir: 'rtl' },
 			},
 			customCss: ['./src/styles/manual.css'],
+			components: { Footer: './src/components/ManualFooter.astro' },
 			tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 3 },
 			pagination: true,
 			lastUpdated: true,

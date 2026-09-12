@@ -1,84 +1,106 @@
 # دليل استخدام نظام ION — ION User Manual
 
-Arabic, RTL user manual for every **ION** customization on top of **Frappe / ERPNext / HRMS**:
-the `ion` (procurement), `ion_crm_sales` (sales & CRM), `aion_custom_hr` (HR), `ion_career`
-(recruitment), `ion_intercompany_transfer`, and `biotime` apps. Built with
-[Astro](https://astro.build) + [Starlight](https://starlight.astro.build), modeled on the
-`eims-manual` template.
+Arabic RTL manual for the actual configuration of **testsite.local**, built with Astro and Starlight.
 
-## Local development
+The September 12, 2026 revision compares effective DocType metadata and permissions,
+active workflows, enabled Notifications, enabled Client/Server Scripts, relevant app
+handlers, and the rendered Desk at `http://10.60.50.108:8001/app`.
+It documents 103 DocTypes across 29 operational pages, with additional navigation,
+help, and administrator guidance. Empty configured DocTypes are explicitly distinguished
+from workflows with demonstrated stored usage.
+
+## Develop and verify
+
+Requires **Node >=22.12.0** (the default Node 18 on this host is too old).
 
 ```sh
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # static output in ./dist
+npm run dev
+npm run build
+npm run check:docs
 npm run preview
 ```
 
-## Deploying to Vercel
+Deploy the static `dist/` directory. Set the production `site` URL in
+`astro.config.mjs` when known. Arabic is the root locale, so routes have no `/ar/` prefix.
 
-Static output, no adapter needed:
+## Read-only site audit
 
-| Setting | Value |
-| --- | --- |
-| Framework preset | Astro |
-| Build command | `npm run build` |
-| Output directory | `dist` |
-| Install command | `npm install` |
+From the bench's sites directory, using its Python environment:
 
-Set `site` in `astro.config.mjs` to the production URL so the sitemap is generated.
+```sh
+/home/frappe/frappe-bench/env/bin/python /home/frappe/ion-manual/tools/audit-site.py
+```
 
-## Content
+The script starts a **read-only database transaction**, reads configuration, writes a
+private generated artifact at `/tmp/ion-manual-site-audit.json`, and rolls back.
+It never saves a business document, runs a workflow, commits, modifies app source/JSON,
+or runs a migration. Do not publish the raw artifact: live scripts and notification
+templates may contain internal information.
 
-`src/content/docs/` — one directory per sidebar chapter, ordered by `sidebar.order`
-in each page's frontmatter:
+`tools/manual-coverage.json` maps each operational page to its DocTypes and curated
+Arabic purpose statements. `tools/render-site-reference.mjs` renders **an apply_patch
+patch to stdout**, not direct edits, for the verified permissions/workflow/notification
+sections:
 
-| Directory | Chapter | Source app |
-| --- | --- | --- |
-| `start/` | ابدأ من هنا | — |
-| `buying/` | المشتريات (ION) | `ion` |
-| `sales-crm/` | المبيعات وإدارة العملاء | `ion_crm_sales` |
-| `hr/` | تخصيصات الموارد البشرية | `aion_custom_hr` |
-| `career/` | التوظيف | `ion_career` |
-| `intercompany/` | التحويل بين الشركات | `ion_intercompany_transfer` |
-| `biotime/` | تكامل البصمة BioTime | `biotime` |
-| `users/` | المستخدمون والأدوار | — |
-| `help/` | المساعدة | — |
+```sh
+node tools/render-site-reference.mjs /tmp/ion-manual-site-audit.json
+# Optional: render one page only
+node tools/render-site-reference.mjs /tmp/ion-manual-site-audit.json buying/material-request
+```
 
-Arabic is the only locale (`locales.root` with `dir: 'rtl'`), so pages have no `/ar/` prefix.
-The desk this manual documents runs mostly in English by default — screenshots and quoted
-UI labels were captured after switching the documenting user's `Language` field to `ar`
-(desk-wide translation coverage is partial; untranslated labels are quoted and glossed
-in place, same convention as `eims-manual`).
+Review the patch and apply it with the patch tool. Prose outside the marked generated
+sections needs human/source review as well. The renderer deliberately rejects newly
+encountered conditions without a reviewed user-facing explanation.
 
 ## Screenshots
 
-`src/assets/screens/` — PNG/JPG screenshots captured interactively from a live ION site
-via the `claude-in-chrome` browser tool (an already-authenticated session), not the
-headless `tools/screenshots.mjs` pipeline inherited from the `eims-manual` template —
-this bench had no saved Administrator password available for a scripted login.
-
-To regenerate a screenshot set with the scripted pipeline instead (e.g. once credentials
-are available), the template is still in place:
+`tools/shots.json` contains ION routes and DocTypes. The pipeline uses real Chromium
+screenshots of unsaved full forms, existing Single settings, and Desk navigation.
+It does not use synthetic screenshots or AI-generated interface images. All images
+referenced by the revised manual use the `current-` prefix; original JPG assets remain
+in the repository for history but are not used by the revised pages.
 
 ```sh
-npm i -D playwright-core
-BASE=http://localhost:8000 PASSWORD=yourpassword node tools/screenshots.mjs
+npx playwright-core install chromium
+LOCAL_SESSION=1 node tools/screenshots.mjs
+# Optional single group
+LOCAL_SESSION=1 node tools/screenshots.mjs 'current-material-request'
 ```
 
-`tools/shots.json` is a starting template carried over from `eims-manual` — its URLs
-reference EIMS record names and must be rewritten for ION's own doctypes/records before
-the script is useful here.
+`LOCAL_SESSION=1` is for this authorized local bench only. It reads existing
+Administrator sessions with `tools/site-session.py` and passes session IDs only in
+process memory; it neither resets a password nor creates a login session. Alternatively,
+provide `SID` securely in the environment. Never put session tokens in the manifest,
+logs, source, or command-line arguments. `BASE` and `CHROME` can override the site and
+browser executable.
 
-`CHROME` overrides the browser binary path.
+The capture context blocks business write requests. Standard view/session activity
+may still occur on the server, as with ordinary browsing. It never clicks Save,
+Submit, workflow actions, email, or integration sync. Employee/company defaults,
+list rows, account identity, and BioTime connection values are masked. English UI
+labels reflect the language actually rendered; the documenting user's language was
+not changed.
 
-## Conventions used in the manual
+Capture diagnostics are written to `/tmp/ion-manual-screenshot-report.json`.
+A captured image proves rendered layout, not successful validation or role-specific
+end-to-end operation. The audit intentionally did not submit financial/HR/stock
+transactions, send mail, or contact BioTime.
 
-- Every UI label is quoted **exactly as the desk renders it**, including English labels
-  left untranslated (`Manager services`, `Additional Info`, field labels with typos
-  preserved verbatim like `Bussniess unit` and `penalty managment`). Where a label has no
-  Arabic translation, the English string is given with a gloss.
-- Every error message is quoted verbatim, with its cause and fix — see `help/errors.md`.
-- Automated behavior (scheduled jobs, auto-notifications, auto-calculated fields) is
-  called out explicitly in `:::note` callouts wherever it changes what a user should
-  expect to do manually vs. not.
+Screenshots in the manual open in a keyboard-accessible full-size viewer. On mobile,
+scroll inside the enlarged image to read fields; Escape or Close restores focus.
+
+## Known configuration findings
+
+See `src/content/docs/users/active-scripts.md` and the relevant DocType pages:
+
+- Material Request's technical department/user fields are absent from effective metadata;
+  its active workflow has no technical approval stage. A stale client call still errors.
+- `Just to Test` marks new Email Queue rows/recipients Sent without delivering mail.
+- Intercompany transfers create stock and journal entries through active Server Scripts.
+- Workflow roles and base DocType permissions have mismatches in several places.
+- Custom User Permission auto-creation returns without doing any work.
+- Appraisal generation covers the 21st of the previous month through the 20th of the current month.
+
+These are documented findings. **No Frappe app code, app JSON, site scripts, workflows,
+permissions, or business data were edited; no bench migrate was run.**

@@ -1,56 +1,98 @@
 ---
 title: الهوت-سبوت
-description: تركيب وصيانة شبكات الهوت-سبوت — من التأهيل التجاري إلى التشغيل والصيانة الدورية.
+description: مسؤوليات البيع والمسح والتركيب ومسار Hotspot الفعلي.
 sidebar:
   order: 3
 ---
 
-**Hotspot** مسار منفصل عن عائلة الفرص — يغطّي دورة حياة **شبكة هوت-سبوت** كاملة: من عرض الخدمة على العميل، مروراً بالمسح الفني وتركيب المعدات، وصولاً للتشغيل والصيانة الدورية.
+**Hotspot** يتابع تأهيل موقع شبكة هوت-سبوت، والعرض التجاري، والمسح، والإعداد، ثم التشغيل والإغلاق. افتحه بالبحث عن `Hotspot`.
 
-## أين أجده؟
+![نموذج Hotspot الحالي](../../../assets/screens/current-hotspot.png)
 
-اكتب في شريط البحث: `Hotspot`
+## البيانات والمسؤولون
 
-![قائمة سجلات Hotspot](../../../assets/screens/list-hotspot.jpg)
+حدد **Type**: عرض من الشركة أو طلب من العميل، ثم **Hotspot For** والطرف في **Party** و**Pre-Sales**. دوّن نوع الموقع والمنتج، وأضف المعدات وبيانات الشبكة عندما يحين وقتها.
 
-## الحقول الأساسية
+**Hotspot Sales** يدير التأهيل والعرض والإعداد والإغلاق. **Surveyor Manager** يدير مرحلة المسح، و**Pre-Sales** يوافق على نتيجة المسح أو يرفضها فنياً.
 
-| الحقل | إجباري | ماذا يعني |
-| --- | :---: | --- |
-| **النوع** | ✅ | Based on Company Proposal (عرض من الشركة) أو Based on Customer Request (طلب من العميل) |
-| **Hotspot For** | ✅ | الطرف المعني (رابط ديناميكي) |
-| **Pre-Sales** | ✅ | المستخدم المسؤول عن ما قبل البيع |
-| **Hotspot Type** | — | Café / Restaurant / Resort / School / Hospital / ... |
-| **المنتج** | — | Hotel / Hotspot / Street Wifi / Mall |
-| Access Controller، Access Point IP، SSID Name، CPE IP، VLAN، Tower/Sector، Wireless MAC | — | إعدادات الشبكة بعد التركيب |
+:::caution[دور الانتقال لا يضمن الوصول]
+صلاحيات DocType الحالية تمنح القراءة والإنشاء والتعديل لـ System Manager وDedicated QA. قد يحتاج من يحمل دور انتقال إلى حقوق وصول إضافية؛ راجع المسؤول عند غياب السجل أو زر الإجراء.
+:::
 
-## سير العمل والحالة التالية المقترَحة
+## المسار الحالي
 
-![نموذج Hotspot يعرض الحالات التالية المتاحة](../../../assets/screens/form-hotspot.jpg)
+Draft → Qualifying، ثم **Accept → Surveying** أو **Propose → Proposed → Accept → Surveying**. بعد المسح: Surveyed → Setup → Active → Closed.
 
-مثل عائلة الفرص، لا يُعتمَد (Submit) مستند Hotspot، بل ينتقل بسير عمل بالأدوار. الميزة هنا أن النظام **يعرض لك مباشرة أعلى النموذج** الحالات التالية الممكنة من حالتك الحالية (`Next available statuses`)، فلا حاجة لتخمينها.
+من Proposed يمكن **Revise → Under Revision** ثم إعادة Propose. الرفض التجاري متاح من Qualifying أو Proposed، والفني من Surveyed. لا توجد مرحلة Requirements Gathering ضمن هذا Workflow النشط، ولا يتيح الرفض من كل مرحلة.
 
-التسلسل العام:
+## التنفيذ والصيانة
 
-```
-التأهيل (Qualifying) → مقترح (Proposed) → المسح الفني (Surveying)
-    → تم المسح (Surveyed) → جمع المتطلبات (Requirements Gathering)
-    → الإعدادات (Setup) → نشط (Active) → مغلق (Closed)
-```
+بعد اكتمال المسح، راجع المعدات والأصناف ومعلومات الشبكة قبل Setup. استخدم جداول الأصول والصيانة الظاهرة لتوثيق التجهيزات والزيارات والمسؤول عنها. هذه جداول تابعة للموقع، وليست موافقات مستقلة.
 
-مع مسارات **رفض فني** أو **رفض تجاري** ممكنة عند أي مرحلة، تعيد السجل لحالة **مرفوض** ليُعاد النظر فيه.
+إضافة مسّاح إلى جدول التعيين تشغل منطق أسئلة المسح وإشعاره؛ يجب إكمال الإجابات قبل الانتقال إلى Surveyed. لا توجد قاعدة Notification مستقلة مفعلة باسم هذا DocType في المراجعة، لكن توجد معالجات تطبيق للمسح وسير العمل. تابع الحالة داخل النظام بسبب [قيد البريد الحالي](/users/active-scripts/).
 
-## الأصول والصيانة
+<!-- BEGIN VERIFIED SITE REFERENCE -->
 
-بعد وصول الهوت-سبوت لحالة **نشط**، يستخدم فريق الصيانة جدولين:
+## مرجع الأدوار وسير العمل والإشعارات
 
-| الجدول | ماذا يسجّل |
-| --- | --- |
-| **Hotspot Asset** | معدّات مركّبة في الموقع (نوع CPE: Indoor/Outdoor AP، Switch، Cabinet، Router، PDU) وقيمتها |
-| **Maintenance Log** | زيارات الصيانة — جدول الصيانة المرتبط، تاريخ الزيارة، والفني المسؤول (Agent) |
+تمت المراجعة من إعدادات **testsite.local — 12 سبتمبر 2026**. مستوى 0 هو الحقوق الأساسية؛ المستويات الأعلى تخص مجموعات حقول محددة. علامة — تعني أن صف الدور لا يمنح الحق. لا تجمع الصور كل أدوار المستخدمين؛ الصور التقطت بحساب الإدارة.
 
-استخدم **Maintenance Log** لتوثيق كل زيارة صيانة ميدانية، ليبقى تاريخ الموقع كاملاً حتى لو تغيّر الفني المسؤول.
+**تنبيه البريد:** [سكربت موقع الاختبار يضع البريد في Sent دون إرساله](/users/active-scripts/). تابع المستند والتنبيهات المتاحة داخل النظام.
 
-## من العرض إلى التركيب
+### Hotspot
 
-عند اعتماد عرض هوت-سبوت (من نوع Based on Company Proposal)، تُضاف الأصناف والمواد المطلوبة في جدولي **Items** و**Material** (المرتبط بـ Material Request Item) — ما يتيح لك تحويل الاحتياج مباشرة إلى **طلب مواد** أو **قيد مخزون (Stock Entry)** دون إعادة الكتابة يدوياً.
+**الدور:** متابعة تأهيل وتركيب وتشغيل وإغلاق موقع هوت-سبوت.
+
+**صلاحيات الأدوار الفعلية** (تظل قيود السجلات والحالة والشروط سارية):
+
+| الدور/الأدوار | مستوى الحقول | قراءة | إنشاء | تعديل | اعتماد | إلغاء | القيد |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| System Manager، Dedicated QA | 0 | نعم | نعم | نعم | — | — | بحسب النطاق المسموح |
+
+**سير العمل النشط:** `Hotspot`. استخدم قائمة الإجراءات؛ لا تعدل حقل الحالة يدوياً. دور الانتقال لا يمنح حقوق القراءة/الكتابة/الاعتماد الناقصة.
+
+| من الحالة | الإجراء | إلى الحالة | الدور المنفّذ | الشرط | حالة المستند بعده |
+| --- | --- | --- | --- | --- | --- |
+| Draft | Qualify | Qualifying | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Draft | Reject | Rejected | Hotspot Sales | لا شرط إضافي في الانتقال | مسودة (0) |
+| Qualifying | Accept | Surveying | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Qualifying | Propose | Proposed | Hotspot Sales | لا شرط إضافي في الانتقال | مسودة (0) |
+| Qualifying | Reject | Commercially Rejected | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Proposed | Accept | Surveying | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Proposed | Revise | Under Revision | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Proposed | Reject | Commercially Rejected | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+| Surveying | Survey | Surveyed | Surveyor Manager | لا شرط إضافي في الانتقال | — |
+| Surveyed | Approve | Setup | Pre-Sales | لا شرط إضافي في الانتقال | مسودة (0) |
+| Surveyed | Reject | Technically Rejected | Pre-Sales | لا شرط إضافي في الانتقال | — |
+| Under Revision | Propose | Proposed | Hotspot Sales | لا شرط إضافي في الانتقال | مسودة (0) |
+| Setup | Setup | Active | Hotspot Sales | لا شرط إضافي في الانتقال | مسودة (0) |
+| Active | Close | Closed | Hotspot Sales | لا شرط إضافي في الانتقال | — |
+
+<details>
+<summary>من يحرر المستند في كل حالة؟</summary>
+
+الدور أدناه هو Allow Edit في إعداد الحالة، ويضاف إلى حقوق الحقول ونطاق السجل.
+
+| الحالة | دور تحرير الحالة | حالة المستند |
+| --- | --- | --- |
+| Draft | Hotspot Sales | مسودة (0) |
+| Qualifying | Hotspot Sales | — |
+| Under Revision | Hotspot Sales | — |
+| Commercially Rejected | All | — |
+| Surveying | Surveyor | — |
+| Surveyed | Pre-Sales | — |
+| Technically Rejected | All | — |
+| Requirements Gathering | Hotspot Sales | — |
+| Closed | Hotspot Sales | — |
+| Proposed | Hotspot Sales | مسودة (0) |
+| Setup | Hotspot Sales | مسودة (0) |
+| Active | Hotspot Sales | مسودة (0) |
+| Rejected | Hotspot Sales | مسودة (0) |
+
+</details>
+
+بريد Workflow القياسي **غير مفعّل** لهذا السير. يمكن أن تعمل قواعد Notification ومعالجات التطبيق بشكل مستقل عنه.
+
+**الإشعارات:** لا توجد قاعدة Notification مستقلة مفعلة لهذا النوع في لقطة المراجعة. قد تنطبق معالجات التطبيق المذكورة في الشرح أو معالج ION العام عند وجود workflow_state؛ غياب القاعدة ليس دليلاً على غياب كل تنبيه.
+
+<!-- END VERIFIED SITE REFERENCE -->

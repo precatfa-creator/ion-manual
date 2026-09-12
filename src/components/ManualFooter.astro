@@ -1,0 +1,78 @@
+---
+import Footer from '@astrojs/starlight/components/Footer.astro';
+---
+
+<Footer />
+<dialog id="manual-image-dialog" aria-labelledby="manual-image-caption">
+  <div class="image-toolbar">
+    <p id="manual-image-caption"></p>
+    <button type="button" data-close-image autofocus>إغلاق ×</button>
+  </div>
+  <p class="image-help">الصورة بالحجم الكامل؛ مرّر لعرض بقية الحقول. اضغط Esc للإغلاق.</p>
+  <div class="image-viewport" tabindex="0" aria-label="الصورة المكبرة، قابلة للتمرير">
+    <img id="manual-expanded-image" alt="" />
+  </div>
+</dialog>
+
+<script>
+  function enableImageZoom() {
+    const dialog = document.querySelector<HTMLDialogElement>('#manual-image-dialog');
+    const expanded = dialog?.querySelector<HTMLImageElement>('#manual-expanded-image');
+    const caption = dialog?.querySelector('#manual-image-caption');
+    if (!dialog || !expanded || !caption) return;
+    let opener: HTMLButtonElement | null = null;
+    document.querySelectorAll<HTMLImageElement>('.sl-markdown-content img').forEach(img => {
+      if (img.closest('a, button')) return;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'manual-image-zoom';
+      button.setAttribute('aria-label', 'تكبير الصورة: ' + img.alt);
+      button.title = 'اضغط لعرض الصورة بالحجم الكامل';
+      img.before(button);
+      button.append(img);
+      button.addEventListener('click', () => {
+        opener = button;
+        expanded.src = img.currentSrc || img.src;
+        expanded.alt = img.alt;
+        expanded.style.width = img.naturalWidth + 'px';
+        caption.textContent = img.alt;
+        dialog.showModal();
+        dialog.querySelector('.image-viewport')?.scrollTo(0, 0);
+      });
+    });
+    dialog.querySelector('[data-close-image]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+    dialog.addEventListener('close', () => opener?.focus());
+  }
+  enableImageZoom();
+  document.addEventListener('astro:page-load', enableImageZoom);
+</script>
+
+<style>
+  :global(.manual-image-zoom) {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: zoom-in;
+  }
+  :global(.manual-image-zoom:focus-visible) { outline: 3px solid var(--sl-color-accent-high); outline-offset: 4px; }
+  dialog {
+    width: min(96vw, 1500px);
+    max-width: 96vw;
+    max-height: 94dvh;
+    padding: 1rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: .6rem;
+    background: var(--sl-color-bg);
+    color: var(--sl-color-text);
+  }
+  dialog::backdrop { background: rgb(0 0 0 / .7); }
+  .image-toolbar { display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+  .image-toolbar p { margin: 0; font-weight: 700; }
+  .image-toolbar button { padding: .5rem 1rem; cursor: pointer; color: inherit; background: var(--sl-color-bg-inline-code); border: 1px solid var(--sl-color-gray-4); border-radius: .3rem; flex-shrink: 0; }
+  .image-help { font-size: .9rem; margin-block: .75rem; }
+  .image-viewport { overflow: auto; max-height: 73dvh; direction: ltr; background: white; }
+  .image-viewport img { display: block; max-width: none; height: auto; }
+</style>
