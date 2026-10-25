@@ -9,7 +9,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'دليل استخدام نظام ION',
-			description: 'الدليل الكامل لجميع تخصيصات ION على منصة Frappe / ERPNext / HRMS — المشتريات، المبيعات وإدارة العملاء، الموارد البشرية، التوظيف، التحويل بين الشركات، وتكامل البصمة.',
+			description: 'الدليل الكامل لجميع تخصيصات ION على منصة Frappe / ERPNext / HRMS — المشتريات، المبيعات وإدارة العملاء، حجوزات الاشتراكات (RMT)، الموارد البشرية، التوظيف، التحويل بين الشركات، وتكامل البصمة.',
 			// Arabic is the only locale: no /ar/ prefix, RTL layout everywhere.
 			locales: {
 				root: { label: 'العربية', lang: 'ar', dir: 'rtl' },
@@ -23,6 +23,7 @@ export default defineConfig({
 				{ label: 'ابدأ من هنا', items: [{ autogenerate: { directory: 'start' } }] },
 				{ label: 'المشتريات (ION)', items: [{ autogenerate: { directory: 'buying' } }] },
 				{ label: 'المبيعات وإدارة العملاء', items: [{ autogenerate: { directory: 'sales-crm' } }] },
+				{ label: 'حجوزات الاشتراكات (RMT)', items: [{ autogenerate: { directory: 'rmt' } }] },
 				{ label: 'تخصيصات الموارد البشرية', items: [{ autogenerate: { directory: 'hr' } }] },
 				{ label: 'التوظيف', items: [{ autogenerate: { directory: 'career' } }] },
 				{ label: 'التحويل بين الشركات', items: [{ autogenerate: { directory: 'intercompany' } }] },

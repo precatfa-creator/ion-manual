@@ -24,7 +24,7 @@ try:
     names.update(frappe.get_all("Client Script", filters={"enabled": 1}, pluck="dt"))
     names.update(frappe.get_all("Server Script", filters={"disabled": 0, "script_type": "DocType Event"}, pluck="reference_doctype"))
     names.update(frappe.get_all("Notification", filters={"enabled": 1}, pluck="document_type"))
-    names.update(["Salary Structure Assignment", "Salary Structure", "Shift Assignment", "Subscription Plan"])
+    names.update(["Salary Structure Assignment", "Salary Structure", "Shift Assignment", "Subscription Plan", "Installation Note"])
     doctypes = {}
     for name in sorted(names):
         if not frappe.db.exists("DocType", name):
@@ -40,7 +40,7 @@ try:
     clients = frappe.get_all("Client Script", filters={"enabled": 1}, fields=["name", "dt", "view", "script"])
     servers = frappe.get_all("Server Script", filters={"disabled": 0}, fields=["name", "script_type", "reference_doctype", "doctype_event", "script"])
     hooks = {key: frappe.get_hooks(key) for key in ("doc_events", "doctype_js", "override_doctype_class", "permission_query_conditions", "has_permission", "scheduler_events")}
-    result = {"site": SITE, "apps": apps, "doctypes": doctypes, "workflows": workflows, "notifications": notifications, "client_scripts": clients, "server_scripts": servers, "hooks": hooks,
+    result = {"site": SITE, "audited_on": str(frappe.utils.getdate()), "apps": apps, "doctypes": doctypes, "workflows": workflows, "notifications": notifications, "client_scripts": clients, "server_scripts": servers, "hooks": hooks,
               "blocked_notifications": frappe.get_all("Notification Blocked Doctypes", pluck="name"),
               "email_outgoing_enabled": bool(frappe.db.count("Email Account", {"enable_outgoing": 1})),
               "server_script_enabled": bool(frappe.conf.get("server_script_enabled")),

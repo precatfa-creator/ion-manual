@@ -9,9 +9,17 @@ It documents 103 DocTypes across 29 operational pages, with additional navigatio
 help, and administrator guidance. Empty configured DocTypes are explicitly distinguished
 from workflows with demonstrated stored usage.
 
+The **October 25, 2026** revision adds the chapter **حجوزات الاشتراكات (RMT)** (`src/content/docs/rmt/`):
+the Subscription Booking cycle, distributor Booking Settings, the Confirm dialog, sales documents,
+Installation Notes, the ION RMT contract, the RMT workspace, the six RMT reports, and every RMT
+error message. Its verified reference sections come from a read-only audit taken that day
+(`audited_on` in the artifact; the renderer prints that date). Pages reviewed earlier keep their
+September 12 reference until they are re-rendered.
+
 ## Develop and verify
 
-Requires **Node >=22.12.0** (the default Node 18 on this host is too old).
+Requires **Node >=22.12.0** (the default Node 18 on this host is too old; Node 22 is at
+`~/.nvm/versions/node/v22.23.2/bin`).
 
 ```sh
 npm install

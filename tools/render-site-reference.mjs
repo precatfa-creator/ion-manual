@@ -10,6 +10,10 @@ const marker = '<!-- BEGIN VERIFIED SITE REFERENCE -->';
 const cell = value => String(value ?? '—').replaceAll('|', '&#124;').replaceAll('\n', ' ').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 const code = value => '`' + cell(value) + '`';
 const table = (headers, rows) => '\n| ' + headers.join(' | ') + ' |\n| ' + headers.map(() => '---').join(' | ') + ' |\n' + rows.map(r => '| ' + r.map(cell).join(' | ') + ' |').join('\n') + '\n';
+const MONTHS = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+// audits before audited_on existed were all taken on 2026-09-12
+const [year, month, day] = (audit.audited_on || '2026-09-12').split('-').map(Number);
+const auditDate = day + ' ' + MONTHS[month - 1] + ' ' + year;
 const status = value => ({0:'مسودة (0)',1:'معتمد (1)',2:'ملغى (2)'}[value] || value);
 function transitionCondition(t) {
   if (!t.condition?.trim()) return 'لا شرط إضافي في الانتقال';
@@ -55,11 +59,14 @@ function notifications(dt) {
     return [n.name,events[n.event]||n.event,notificationCondition(n),recipients,n.channel==='System Notification'?'جرس النظام':n.channel+(n.send_system_notification?' + جرس النظام':' فقط')];
   }));
 }
-function section(dt,purpose) {
+// options.automatic: the documents are created by the application itself (e.g. on Confirm),
+// so having none yet does not mean the screen is unused
+function section(dt,purpose,options={}) {
   const d = audit.doctypes[dt];
   if (!d) throw new Error('Missing audited DocType: '+dt);
   let out = '\n### '+dt+'\n\n**الدور:** '+purpose+'\n';
-  if (d.count === 0) out += '\n*الشاشة متاحة في الإعداد، لكن لم توجد لها سجلات محفوظة وقت المراجعة؛ لا يُفترض أنها خطوة يومية مستخدمة أو مطلوبة لمجرد وجودها.*\n';
+  if (d.count === 0 && options.automatic) out += '\n*لا توجد سجلات محفوظة وقت المراجعة؛ هذه المستندات ينشئها التطبيق تلقائياً عند الخطوة الموضحة في الشرح.*\n';
+  else if (d.count === 0) out += '\n*الشاشة متاحة في الإعداد، لكن لم توجد لها سجلات محفوظة وقت المراجعة؛ لا يُفترض أنها خطوة يومية مستخدمة أو مطلوبة لمجرد وجودها.*\n';
   const grouped = new Map();
   for (const p of d.permissions) {
     const key = JSON.stringify([p.permlevel||0,p.read,p.create,p.write,p.submit,p.cancel,p.if_owner]);
@@ -87,7 +94,7 @@ for (const [route, entries] of Object.entries(coverage)) {
   const file = 'src/content/docs/'+route+'.md';
   const original = fs.readFileSync(path.join(root,file),'utf8').trimEnd();
   const body = original.split(marker)[0].trimEnd();
-  const generated = '\n\n'+marker+'\n\n## مرجع الأدوار وسير العمل والإشعارات\n\nتمت المراجعة من إعدادات **testsite.local — 12 سبتمبر 2026**. مستوى 0 هو الحقوق الأساسية؛ المستويات الأعلى تخص مجموعات حقول محددة. علامة — تعني أن صف الدور لا يمنح الحق. لا تجمع الصور كل أدوار المستخدمين؛ الصور التقطت بحساب الإدارة.\n\n**تنبيه البريد:** [سكربت موقع الاختبار يضع البريد في Sent دون إرساله](/users/active-scripts/). تابع المستند والتنبيهات المتاحة داخل النظام.\n'+entries.map(([dt,purpose])=>section(dt,purpose)).join('')+'\n<!-- END VERIFIED SITE REFERENCE -->';
+  const generated = '\n\n'+marker+'\n\n## مرجع الأدوار وسير العمل والإشعارات\n\nتمت المراجعة من إعدادات **testsite.local — '+auditDate+'**. مستوى 0 هو الحقوق الأساسية؛ المستويات الأعلى تخص مجموعات حقول محددة. علامة — تعني أن صف الدور لا يمنح الحق. لا تجمع الصور كل أدوار المستخدمين؛ الصور التقطت بحساب الإدارة.\n\n**تنبيه البريد:** [سكربت موقع الاختبار يضع البريد في Sent دون إرساله](/users/active-scripts/). تابع المستند والتنبيهات المتاحة داخل النظام.\n'+entries.map(([dt,purpose,options])=>section(dt,purpose,options)).join('')+'\n<!-- END VERIFIED SITE REFERENCE -->';
   const updated = body+generated;
   if (original !== updated) patch += '*** Update File: '+file+'\n@@\n'+original.split('\n').map(l=>'-'+l).join('\n')+'\n'+updated.split('\n').map(l=>'+'+l).join('\n')+'\n';
 }

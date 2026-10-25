@@ -21,7 +21,7 @@ const errors = [];
 const blockedCalls = [];
 page.on('pageerror', e => errors.push(e.message));
 // Viewing forms can trigger background requests; refuse business writes.
-const allowedPost = /(?:getdoc|getdoctype|get_list|get_value|get_count|search_link|search_widget|reportview|get_dashboard|get_open_count|get_docinfo|get_user_info|get_data|get_config|get_defaults|get_onload|load_doctype|load_dashboard|can_create|has_permission|get_workflow|get_transitions|get_active_domains|is_chat_enabled|get_notifications|get_unread|ping|version|get_items|get_linked_docs|get_sidebar_items|get_workspace_sidebar_items|get_desktop_page)/i;
+const allowedPost = /(?:getdoc|getdoctype|get_list|get_value|get_count|search_link|search_widget|reportview|get_dashboard|get_open_count|get_docinfo|get_user_info|get_data|get_config|get_defaults|get_onload|load_doctype|load_dashboard|can_create|has_permission|get_workflow|get_transitions|get_active_domains|is_chat_enabled|get_notifications|get_unread|ping|version|get_items|get_linked_docs|get_sidebar_items|get_workspace_sidebar_items|get_desktop_page|query_report\.(?:run|get_script)|get_change_log|number_card\.get_result)/i;
 await page.route('**/api/**', async route => {
   const req = route.request();
   if (req.method() === 'POST' && !allowedPost.test(req.url())) {
@@ -68,12 +68,19 @@ try {
       await page.waitForTimeout(1800);
       if (shot.tab) {
         await page.locator('.form-tabs .nav-link').filter({ hasText: shot.tab }).first().click();
+        await page.waitForTimeout(500);
+      }
+      if (shot.scroll) {
+        await page.evaluate(fieldname => document.querySelector(`.form-layout [data-fieldname="${fieldname}"]`)?.scrollIntoView({ block: 'start' }), shot.scroll);
+        await page.waitForTimeout(300);
       }
       await page.keyboard.press('Escape');
       if (shot.menu) await page.locator('.navbar .dropdown-navbar-user .dropdown-toggle, .navbar .avatar').first().click();
       // Hide personal defaults, account identity, record pickers, and comments.
-      const mask = page.locator('.navbar .avatar, [data-fieldname="employee"] .control-input, [data-fieldname="employee_name"] .control-input, [data-fieldname="custom_employee_name"] .control-input, [data-fieldname="company"] .control-input, .form-footer, .sidebar-menu .user-menu, .list-row-container, .widget.number-widget-box .number');
+      const mask = page.locator('.navbar .avatar, [data-fieldname="employee"] .control-input, [data-fieldname="employee_name"] .control-input, [data-fieldname="custom_employee_name"] .control-input, [data-fieldname="company"] .control-input, .form-footer, .sidebar-menu .user-menu, .list-row-container, .widget.number-widget-box .number, .report-wrapper .dt-scrollable');
       const masks = [mask];
+      // personal data of an existing record (e.g. a subscriber's name, ID and phone)
+      for (const fieldname of shot.maskFields || []) masks.push(page.locator(`[data-fieldname="${fieldname}"] .control-input, [data-fieldname="${fieldname}"] .control-value`));
       if (shot.doctype === 'BioTime Setting') masks.push(page.locator('[data-fieldname="url"] .control-input, [data-fieldname="user_name"] .control-input, [data-fieldname="password"] .control-input'));
       await page.screenshot({ path: path.join(OUT, shot.name + '.png'), fullPage: false, mask: masks, maskColor: '#e2e8f0' });
       const fields = shot.doctype ? await page.evaluate(() => Object.values(cur_frm.fields_dict).filter(f => f.$wrapper?.is(':visible')).map(f => f.df.fieldname)) : [];

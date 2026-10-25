@@ -5,6 +5,10 @@ sidebar:
   order: 1
 ---
 
+:::tip[رسائل حجوزات الاشتراكات]
+رسائل الحجز والتأكيد والتركيب وعقد RMT مجمعة في [رسائل RMT ومعانيها](/rmt/errors/).
+:::
+
 ## "No Employee record is linked to your user account. Please contact HR."
 
 **أين تظهر؟** عند فتح أي مستند من مستندات [الموارد البشرية](/hr/attendance-lateness/) الذي يتطلّب موظفاً حالياً (طلب ساعات تأخير، طلب ساعات إضافية، ...).

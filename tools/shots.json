@@ -195,5 +195,86 @@
     "name": "current-user-menu",
     "url": "/app/home",
     "menu": true
+  },
+  {
+    "name": "current-rmt-workspace",
+    "url": "/app/rmt"
+  },
+  {
+    "name": "current-subscription-type",
+    "doctype": "Subscription Type"
+  },
+  {
+    "name": "current-distributor-booking-settings",
+    "doctype": "Distributor",
+    "tab": "Booking Settings"
+  },
+  {
+    "name": "current-subscription-booking",
+    "doctype": "Subscription Booking"
+  },
+  {
+    "name": "current-subscription-booking-billings",
+    "doctype": "Subscription Booking",
+    "tab": "Billings"
+  },
+  {
+    "name": "current-subscription-booking-pending",
+    "url": "/app/subscription-booking/SUB-BK-26-10-00007",
+    "maskFields": [
+      "full_name",
+      "national_id",
+      "passport_no",
+      "id_number",
+      "date_of_birth",
+      "phone_no_1",
+      "phone_no_2",
+      "address_details",
+      "customer"
+    ]
+  },
+  {
+    "name": "current-subscription-booking-confirmed",
+    "url": "/app/subscription-booking/SUB-BK-26-10-00014",
+    "maskFields": [
+      "full_name",
+      "national_id",
+      "passport_no",
+      "id_number",
+      "date_of_birth",
+      "phone_no_1",
+      "phone_no_2",
+      "address_details",
+      "customer"
+    ]
+  },
+  {
+    "name": "current-installation-note-rmt",
+    "doctype": "Installation Note",
+    "scroll": "custom_subscription_booking"
+  },
+  {
+    "name": "current-rmt-bookings-register",
+    "url": "/app/query-report/RMT Bookings Register"
+  },
+  {
+    "name": "current-rmt-distributor-performance",
+    "url": "/app/query-report/RMT Distributor Performance"
+  },
+  {
+    "name": "current-rmt-collections",
+    "url": "/app/query-report/RMT Collections by Mode of Payment"
+  },
+  {
+    "name": "current-rmt-pending-installations",
+    "url": "/app/query-report/RMT Pending Installations"
+  },
+  {
+    "name": "current-rmt-pipeline-aging",
+    "url": "/app/query-report/RMT Booking Pipeline Aging"
+  },
+  {
+    "name": "current-rmt-contract-status",
+    "url": "/app/query-report/RMT Contract Status"
   }
 ]
